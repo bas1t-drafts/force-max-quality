@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Force Max Quality</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>Force Max Quality</strong></span>
+      </div>
+      <span id="status" class="pill">checking…</span>
+    </header>
+
+    <main>
+      <label class="row toggle-row">
+        <span class="row-text">
+          <span class="title">Force best quality</span>
+          <span class="hint">Advertise only the top variant to the player</span>
+        </span>
+        <input id="enabled" type="checkbox" class="switch" />
+      </label>
+
+      <section class="card">
+        <label class="row">
+          <span class="title">Mode</span>
+          <select id="strategy">
+            <option value="max">Highest available</option>
+            <option value="cap">Highest under cap</option>
+            <option value="pin">Specific quality</option>
+          </select>
+        </label>
+
+        <label class="row" id="capRow" hidden>
+          <span class="title">Cap (Mbps)</span>
+          <input id="capMbps" type="number" min="1" max="200" step="0.5" />
+        </label>
+
+        <label class="row">
+          <span class="title">Avoid HDR variants</span>
+          <input id="avoidHdr" type="checkbox" />
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span>Detected stream</span>
+          <span id="streamBadge" class="mini">—</span>
+        </div>
+        <div id="streamBody" class="muted">Open a supported stream and press play.</div>
+        <div id="pickHint" class="hint" hidden></div>
+        <div id="playingLine" class="playing" hidden></div>
+        <div id="workerLine" class="hint worker-line" hidden></div>
+      </section>
+
+      <div class="actions">
+        <button id="reload" class="btn primary" type="button">Reload player</button>
+        <button id="copy" class="btn" type="button">Copy diagnostics</button>
+      </div>
+
+      <p id="reloadHint" class="hint hint-warn" hidden>Settings changed — reload the player to apply.</p>
+
+      <details class="advanced">
+        <summary>Advanced</summary>
+        <label class="row">
+          <span class="title">Debug logging</span>
+          <input id="debug" type="checkbox" />
+        </label>
+        <p class="hint">
+          Run <code>__f1hqDebug()</code> in the page console for internals.
+        </p>
+        <div id="frameworks" class="hint"></div>
+      </details>
+    </main>
+
+    <p class="disclaimer">
+      Unofficial tool. Not affiliated with, endorsed by, or sponsored by Formula 1
+      or F1 TV. All trademarks belong to their respective owners.
+    </p>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

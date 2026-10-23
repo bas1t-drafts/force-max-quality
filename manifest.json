@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Force Max Quality — HLS Quality Pinner",
+  "version": "0.3.0",
+  "description": "Pins HLS web players to the highest rendition the account is already entitled to, instead of letting auto-bitrate decide.",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["*://*.formula1.com/*", "*://*.f1tv.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Force Max Quality",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.formula1.com/*", "*://*.f1tv.com/*"],
+      "js": ["src/main-world.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": ["*://*.formula1.com/*", "*://*.f1tv.com/*"],
+      "js": ["src/isolated.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
